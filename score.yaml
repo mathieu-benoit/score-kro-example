@@ -4,6 +4,9 @@ metadata:
 containers:
   webapp:
     image: .
+    variables:
+      DATABASE_URL: ${resources.env.databaseURL}
+      API_KEY: ${resources.env.apiKey}
     volumes:
     - source: ${resources.tmp}
       target: /tmp
@@ -14,6 +17,8 @@ service:
       port: 8080
       targetPort: 8080
 resources:
+  env:
+    type: environment
   tmp:
     type: volume
   hpa:
@@ -22,8 +27,6 @@ resources:
       minReplicas: 2
   dns:
     type: dns
-    params:
-      host: webapp.vcluster-x.webinar.stackit.run
   route:
     type: route
     params:
