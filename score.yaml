@@ -4,20 +4,26 @@ metadata:
 containers:
   webapp:
     image: .
+    volumes:
+    - source: ${resources.tmp}
+      target: /tmp
+      readOnly: false
 service:
   ports:
     tcp:
       port: 8080
       targetPort: 8080
 resources:
+  tmp:
+    type: volume
   hpa:
     type: horizontal-pod-autoscaler
-    params: # optional
-      minReplicas: 4 # optional
-      maxReplicas: 10 # optional
-      targetCPUUtilizationPercentage: 90 # optional
+    params:
+      minReplicas: 2
   dns:
     type: dns
+    params:
+      host: webapp.vcluster-x.webinar.stackit.run
   route:
     type: route
     params:

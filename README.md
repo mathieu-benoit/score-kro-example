@@ -11,7 +11,7 @@ score-k8s init \
 
 ```bash
 score-k8s generate score.yaml \
-    --image ghcr.io/la-cc/simple-webapp:1.0.1
+    --image ghcr.io/la-cc/simple-landing-page:0.0.6
 ```
 
 ```bash
