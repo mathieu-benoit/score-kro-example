@@ -7,22 +7,19 @@ score-k8s init \
     --provisioners https://raw.githubusercontent.com/score-spec/community-provisioners/refs/heads/main/environment/score-k8s/10-env.provisioners.yaml \
     --provisioners ./init/score-k8s/provisioners/ingress.yaml \
     --patch-templates https://raw.githubusercontent.com/score-spec/community-patchers/refs/heads/main/score-k8s/service-account.tpl \
-    --patch-templates https://raw.githubusercontent.com/score-spec/community-patchers/refs/heads/main/score-k8s/unprivileged.tpl
-
+    --patch-templates https://raw.githubusercontent.com/score-spec/community-patchers/refs/heads/main/score-k8s/unprivileged.tpl \
+    --patch-templates https://raw.githubusercontent.com/score-spec/community-patchers/refs/heads/main/score-k8s/namespace-pss-restricted.tpl
 ```
 
 ```bash
 score-k8s generate score.yaml \
-    --image ghcr.io/la-cc/simple-landing-page:0.0.6
+    --image ghcr.io/la-cc/simple-landing-page:0.0.6 \
+    --namespace my-webapp-instance \
+    --generate-namespace
 ```
 
 ```bash
-kubectl create ns my-webapp-instance
-kubectl label ns my-webapp-instance pod-security.kubernetes.io/enforce=restricted
-```
-
-```bash
-kubectl apply -f manifests.yaml -n my-webapp-instance
+kubectl apply -f manifests.yaml
 ```
 
 From there, you can use the exact same `score.yaml` file with Docker Compose:
