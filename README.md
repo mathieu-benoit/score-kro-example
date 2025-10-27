@@ -1,5 +1,7 @@
 # score-kro-example
 
+**Archived now, use this one instead now: https://github.com/mathieu-benoit/score-kro-demo.**
+
 ```bash
 score-k8s init \
     --no-sample \
